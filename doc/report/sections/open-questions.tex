@@ -3,3 +3,54 @@
 % open questions section
 
 \section{Open questions and research directions}
+
+\subsection{Open questions}
+
+In 2000, Talagrand \cite*{talagrand:1995} proposed more inequalities in dertermining bounds. 
+Generally he extends the Bounded Differences Inequality to further applicable fields. 
+For example, he extends it towards the form of integration. 
+Besides, he also discusses the optimization (or sharpening) on the bounds based on different objects.
+Can we develop further specific inequalities for more narrowed objects? 
+In other words, for some specific application and problems, can we simplify the Bounded Differences Inequality for more precise using?
+Also, can we use the original Bounded Differences Inequality to proof other concept? 
+
+For example the "Hamming Distance": \cite*{hmaji:2017}
+
+Let $x, x' \in \Omega:= \Omega_1 \times \dots \Omega_n$. We define
+    \begin{equation}
+        d_{H}\left(x, x^{\prime}\right):=\left|\left\{i: x_{i} \neq x_{i}^{\prime}\right\}\right|
+    \end{equation}
+
+and define the set $A_k := \{ x: x \in \Omega, d_H (x,A) \leq k\}$
+
+
+Can we prove that 
+\begin{equation}
+    P[X \in A] \cdot P\left[d_{H}(X, A) \geqslant t\right] \leqslant \exp \left(-t^{2} / 2 n\right)
+\end{equation}
+
+\subsection{Doob construction}
+A Doob martingale is a construction of a stochastic process to approximates a given random variable.
+It has the properties of the martingale with respect to the given filtration. 
+
+The Doob construction can be used to help prove the Bounded Differences Inequality by following brief steps. \cite*{Bartlett:2020}
+
+\begin{equation}
+    \begin{aligned}
+    Y_{i} &=\mathbb{E}\left[f(X) \mid X_{1}^{i}\right] \\
+    D_{i} &=Y_{i}-Y_{i-1} \\
+    f(X)-\mathbb{E} f(X) &=\sum_{i=1}^{n} D_{i}
+    \end{aligned}
+\end{equation}
+  
+Then
+\begin{equation}
+    \begin{aligned}
+    D_{i} &=Y_{i}-Y_{i-1}=\mathbb{E}\left[f(X) \mid X_{1}^{i}\right]-\mathbb{E}\left[f(X) \mid X_{1}^{i-1}\right] \\
+    &=\mathbb{E}\left[\mathbb{E}\left[f(X) \mid X_{1}^{i}\right]-f(X) \mid X_{1}^{i-1}\right]
+    \end{aligned}
+\end{equation}
+Thus $D_i$ is a random variable that falls in an interval of length no more than $B_i$.
+
+Similarly, can we use the Doob construction in proof of extended bounded differences inequalities? 
+For example, the inequalities proposed by Talagrand in 2020.

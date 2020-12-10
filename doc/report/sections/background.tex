@@ -4,6 +4,136 @@
 
 \section{Background}
 
+Inequalities in statistics provide a means of bounding measures and quantities. 
+They are usually used to specify bounds on quantities when these bounds are particularly difficult or intractable to compute.
+Inequalities play an important role in the algorithm of statistical learning and machine learning. 
+They are involved in underpinning methods or approaches used in actual cases.
 
+Here are several famous concentration inequalities involved in statistical learning. 
+\begin{itemize}
+  \item Markov's Inequality
+  \item Chebychev's Inequality 
+  \item Bounded Differences Inequality 
+\end{itemize}
+
+In this project, I will focus on the Bounded Differences Inequality.
+
+\subsection{Chebychev's Inequality}
+\begin{theorem} 
+  For some $a \in X$ where $X \subseteq R$, let $f$ be a non-negative function such that
+  $\{ f(x) \geq b, for all x \geq a\}$, where $b \in Y$ where $Y \subseteq R$. Then the following ineuqality holds,
+  \begin{equation}
+    P(x \geq a) \leq \frac{\mathbb{E}f(x)}{b}
+  \end{equation}
+\end{theorem}
+
+\subsection{Chernoff's bound}
+Suppose the function $f$ is monotonically increasing.
+Thus, for every $x \geq a$, $f(x) \geq f(a)$. 
+Substitute $b = f(a)$ in Chebychev's Inequality, and we have:
+
+\begin{equation}
+  P(x \geq a) \leq \frac{\mathbb{E}f(x)}{f(a)}
+\end{equation}
+
+Markov's Inequality says that
+
+\begin{equation}
+  P(x \geq a) \leq \frac{\mathbb{E}x}{a}
+\end{equation}
+
+It holds for $a >0$ and nonnegetive x, 
+
+\begin{equation}
+  P(|x-\mathbb{E}(x)| \geq a) \leq \frac{\mathbb{E}\left\{|x-\mathbb{E}(x)|^{2}\right\}}{a^{2}}=\frac{\operatorname{Var}\{x\}}{a^{2}}
+\end{equation}
+
+The Chernoff's bound is then,
+
+\begin{equation}
+  P(x \geq a) \leq \frac{\mathbb{E}e^{sx}}{e^{sa}}
+\end{equation}
+
+\subsection{Chernoff technique}
+
+\begin{theorem} \cite*{Bartlett:2020}
+  For $t>0$:
+  \begin{equation}
+    P(X-\mathbb{E} X \geq t) \leq \inf _{\lambda>0} e^{-\lambda t} M_{X-\mu}(\lambda)
+  \end{equation}
+\end{theorem}
+
+where $M_{X-\mu}(\lambda)=\mathbb{E} \exp (\lambda(X-\mu))(\text { for } \mu=\mathbb{E} X)$
+is the moment-generating function of $X-\mu$.
+
+By using Hoeffding's Inequality, we will have 
+
+\begin{theorem} \cite*{Bartlett:2020}
+  For a random variable $X \in [a,b]$ with $\mathbb{E}X = \mu$ and $\lambda \in \mathbb{R}$,
+  \begin{equation}
+    \ln M_{X-\mu}(\lambda) \leq \frac{\lambda^{2}(b-a)^{2}}{8}
+  \end{equation}
+\end{theorem}
+
+\subsection{Sub-Gaussian Random Variables}
+\begin{definition} \cite*{Bartlett:2020}
+  $X$ is sub-Gaussian with parameter $\sigma^2$ if, for all $\lambda \in \mathbb{R}$,
+  \begin{equation}
+    \ln M_{X-\mu}(\lambda) \leq \frac{\lambda^{2}(\sigma)^{2}}{2}
+  \end{equation}
+\end{definition}
+
+Examples:
+
+\begin{itemize}
+  \item $X \sim N(\mu, \sigma^2)$ is sub-Gaussian with parameter $\sigma^2$;
+  \item $X \in [a,b]$ is sub-Gaussian with parameter $(b-a)^2 /4$;
+  \item $X_{i}$ is independent, sub-Gaussian with parameters $\sigma_{i}^2$ implies $\sum_{i}X_{i}$ is sub-Gaussian with parameter $\sum_{i}\sigma_{i}^2$.
+\end{itemize}
+
+\subsection{Pre-Gaussian Random Variables}
+\begin{definition} \cite*{Bartlett:2020}
+  $X$ is pre-Gaussian with parameters $(\sigma^2,b)$ if, for all $\left| \lambda \right| < 1/b$,
+  \begin{equation}
+    \log M_{X-\mu}(\lambda) \leq \frac{\lambda^{2} \sigma^{2}}{2}
+  \end{equation}
+\end{definition}
+
+Example:
+
+\begin{itemize}
+  \item Sub-Gaussian $X$ with parameter $\sigma^2$ is pre-Gaussian with parameters $(\sigma^2, b)$ for all $b>0$.
+\end{itemize}
+
+\subsection{Martingales}
+
+\begin{definition} \cite*{Bartlett:2020}
+  A sequence $Y_n$ of random variables adapted to a filtration $\mathcal{F}_n$ is a martingale if, for all $n$,
+  \begin{equation}
+    \begin{aligned}
+    \mathbb{E}\left|Y_{n}\right| &<\infty \\
+    \mathbb{E}\left[Y_{n+1} \mid \mathcal{F}_{n}\right] &=Y_{n}
+    \end{aligned}
+  \end{equation}
+\end{definition}
+
+Note:
+
+\begin{itemize}
+  \item $\mathcal{F}_{n}$ is a filtration means these $\sigma$-fields are nested: $\mathcal{F}_{n} \subset \mathcal{F}_{n+1}$.
+  \item $Y_n$ is adapted to $\mathcal{F}_{n}$ means  that each $Y_n$ is measurable with respect to $\mathcal{F}_n$.
+\end{itemize}
+
+\subsection{Martingale Difference Sequences}
+
+\begin{definition} \cite*{Bartlett:2020}
+  A sequence $D_n$ of random variables adapted to a filtration $\mathcal{F}_n$ is a martingale Difference sequence if, for all n,
+  \begin{equation}
+    \begin{aligned}
+    \mathbb{E}\left|D_{n}\right| &<\infty \\
+    \mathbb{E}\left[D_{n+1} \mid \mathcal{F}_{n}\right] &=0
+    \end{aligned}
+  \end{equation}
+\end{definition}
 
 % ...

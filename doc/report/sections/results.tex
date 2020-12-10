@@ -1,0 +1,258 @@
+% !TEX root = ../main.tex
+
+% Results section
+
+\section{Results}
+
+\subsection{Pre-Gaussian Random Variables}
+\begin{theorem} \cite*{Bartlett:2020}
+  For $X$ pre-Gaussian with parameters $(\sigma^2, b)$,
+  \begin{equation}
+    P(X \geq \mu+t) \leq\left\{\begin{array}{ll}
+    \exp \left(-\frac{t^{2}}{2 \sigma^{2}}\right) & \text { if } 0 \leq t \leq \sigma^{2} / b \\
+    \exp \left(-\frac{t}{2 b}\right) & \text { if } t>\sigma^{2} / b
+    \end{array}\right.
+  \end{equation}
+\end{theorem}
+
+Because $t^2/ \sigma^2 > t^2/ (\sigma^2 + bt)$ and $t^2/ bt > t^2/ (\sigma^2 + bt)$, we have
+
+\begin{equation}
+  P(X \geq \mu+t) \leq 
+  \exp \left(-\frac{t^{2}}{2 (\sigma^2 + bt)}\right) 
+\end{equation}
+
+\begin{proof}
+  Assume $\mu = 0$. For $0 \leq \lambda < 1/b$,
+  \begin{equation}
+    \begin{aligned}
+    P(X \geq t) & \leq \exp (-\lambda t) \mathbb{E} \exp (\lambda X) \\
+    & \leq \exp \left(-\lambda t+\frac{\lambda^{2} \sigma^{2}}{2}\right)
+    \end{aligned}
+  \end{equation}
+  
+  Without the constraint $[0, 1/b)$ on $\lambda$, the minimum occurs at $\lambda* = t/ \sigma^2$.
+  Thus if 
+  \begin{equation}
+    t / \sigma^{2}<1 / b \Longleftrightarrow t<\sigma^{2} / b
+  \end{equation}
+  we have
+  \begin{equation}
+    P(X \geq t) \leq \exp \left(-\lambda^{*} t+\lambda^{* 2} \sigma^{2} / 2\right)=\exp \left(-t^{2} /\left(2 \sigma^{2}\right)\right)
+  \end{equation}
+
+  The function $f: t \rightarrow -\lambda t + \frac{\lambda^2 \sigma^2}{2}$ is monotonically decreasing in $[0, \lambda*]$, and obviously also in $[0, 1/b] \subset [0, \lambda*]$.
+  If $t$ is larger, the minimum will occur at $\lambda = 1/b$. 
+  Therefore, substituting the $\lambda$ gives 
+  \begin{equation}
+    P(X \geq t) \leq \exp \left(-t / b+\sigma^{2} /\left(2 b^{2}\right)\right) \leq \exp (-t /(2 b))
+  \end{equation}
+  where the second inequality follows from $t \geq \sigma^2/b$.
+\end{proof}
+
+For independent $X_{i}$, pre-Gaussian with parameters $(\sigma_{i}^2, b_{i})$, the sum $X = X_1 + \dots + X_n$ is pre-Gaussian with parameters $\sum_{i} \sigma_{i}^2, max_{i} b_{i}$.
+
+Actually, for $\mathbb{E}X_{i} = 0$, we have
+
+\begin{equation}
+  \begin{aligned}
+  M_{X}(\lambda) &=\prod_{i} \mathbb{E} \exp \left(\lambda X_{i}\right) \\
+  & \leq \prod_{i} \exp \left(\lambda^{2} \sigma_{i}^{2} / 2\right)=\exp \left(\lambda^{2} \sum_{i} \sigma_{i}^{2} / 2\right)
+  \end{aligned}
+\end{equation}
+
+When $\left| \lambda \right| < 1/b_i$, for all $i$, the ineuqality holds.
+
+\begin{theorem} \cite*{Bartlett:2020}
+  For independent $X_i$, pre-Gaussian with parameters $(\sigma_{i}^2 , b_i)$, with mean $\mu_i$,
+  \begin{equation}
+    \begin{array}{l}
+    P\left(\frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\mu_{i}\right) \geq t\right) \leq\left\{\begin{array}{ll}
+    \exp \left(-n t^{2} /\left(2 \sigma^{2}\right)\right) & \text { for } 0 \leq t \leq \sigma^{2} / b \\
+    \exp (-n t /(2 b)) & \text { for } t>\sigma^{2} / b
+    \end{array}\right. 
+    
+    \end{array}
+    \end{equation}
+\end{theorem}
+
+where $\sigma^{2}=\sum_{i} \sigma_{i}^{2}$ and $b=\max _{i} b_{i}$.
+
+\subsection{Bernstein's Inequality}
+
+Consider a random variable $X$ with mean $\mu$, variance $\sigma^2$, and bound $\left| X-\mu \right| \leq b$.
+Then $X$ is pre-Gaussian with parameters $(2\sigma^2 , 2b)$. Hence,
+\begin{equation}
+  P(X \geq \mu+t) \leq \exp \left(-\frac{t^{2}}{4\left(\sigma^{2}+b t\right)}\right)
+\end{equation}
+
+When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2 + bt/3)$, we get the Bernstein's Inequality.
+
+\begin{theorem} \cite*{Kutin:2002}
+  Let $\xi_{1}, \dots, \xi_{m}$ be independent random variable, with $\left| \xi_k - \mathbb{E}\xi_k \right| \leq b$ for all $k$. 
+  Let $X = \sum_{k=1}^{m} \xi_k$, and let $\sigma^2 = Var(X)$.
+  Let $\mu = \mathbb{E}X$. Then we have
+  \begin{equation}
+    P(X \geq \mu+t) \leq \exp \left(-\frac{t^{2}}{2(\sigma^2 + bt/3)}\right)
+  \end{equation}  
+\end{theorem}
+
+\subsection{Concentration Bounds for Martingales}
+\begin{theorem} \cite*{Bartlett:2020}
+  Consider a martingale Difference sequence $D_n$ which is adapted to a filtration $\mathcal{F}_n$. 
+  Assume it satisfies 
+
+  \begin{equation}
+    \text { for }|\lambda| \leq 1 / b_{n} \text { a.s., } \mathbb{E}\left[\exp \left(\lambda D_{n}\right) \mid \mathcal{F}_{n-1}\right] \leq \exp \left(\lambda^{2} \sigma_{n}^{2} / 2\right)
+  \end{equation}
+
+  Then $\sum_{i=1}^n D_i$ is pre-Gaussian, with $(\sigma^2, b) = (\sum_{i=1}^n \sigma_{i}^2, max_{i} b_i)$.
+
+  \begin{equation}
+    P\left(\left|\sum_{i} D_{i}\right| \geq t\right) \leq\left\{\begin{array}{ll}
+    2 \exp \left(-t^{2} /\left(2 \sigma^{2}\right)\right) & \text { if } 0 \leq t \leq \sigma^{2} / b \\
+    2 \exp (-t /(2 b)) & \text { if } t>\sigma^{2} / b
+    \end{array}\right.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Given $\left| \lambda \right| < 1/b_n$,
+  \begin{equation}
+    \begin{aligned}
+    \mathbb{E} \exp \left(\lambda \sum_{i} D_{i}\right) &=\mathbb{E}\left[\exp \left(\lambda \sum_{i=1}^{n-1} D_{i}\right) \mathbb{E}\left[\exp \left(\lambda D_{n}\right) \mid \mathcal{F}_{n-1}\right]\right] \\
+    & \leq \mathbb{E}\left[\exp \left(\lambda \sum_{i=1}^{n-1} D_{i}\right)\right] \exp \left(\lambda^{2} \sigma_{n}^{2} / 2\right)
+    \end{aligned}
+  \end{equation}
+  Iterating shows that $\sum_i D_i$ is pre-Gaussian.
+\end{proof}
+
+\begin{theorem} \cite*{Bartlett:2020}
+  Consider a martingale difference sequence $D_i$ that a.s. falls in an interval of length $B_i$. Then
+  \begin{equation}
+    P\left(\left|\sum_{i} D_{i}\right| \geq t\right) \leq 2 \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
+  \end{equation}
+\end{theorem}
+
+\subsection{Bounded Differences Inequality}
+
+\begin{theorem} \cite*{Sridharan_agentle}
+  Suppose $f: \mathcal{X}^n \rightarrow \mathbb{R}$ satisfies the following bounded differences inequality:
+
+  for all $x_1, \dots, x_n , x_{i}' \in \mathcal{X}$,
+  \begin{equation}
+    \left|f\left(x_{1}, \ldots, x_{n}\right)-f\left(x_{1}, \ldots, x_{i-1}, x_{i}^{\prime}, x_{i+1}, \ldots, x_{n}\right)\right| \leq B_{i}
+  \end{equation}
+
+  Then
+  \begin{equation}
+    P(|f(X)-\mathbb{E} f(X)| \geq t) \leq 2 \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Use the Chernoff's bound (5), we have
+  \begin{equation}
+    P(X-\mathbb{E}[X] \geq t) \leq e^{-s t} e^{\mathbb{E}[X-\mathbb{E}[Z]]}
+  \end{equation}
+  
+  Now let,
+  \begin{equation}
+    V_{i}=\mathbb{E}\left[X \mid x_{1}, \ldots, x_{i}\right]-\mathbb{E}\left[X \mid x_{1}, \ldots, x_{i-1}\right], \forall i=1, . ., n
+  \end{equation}
+  
+  Then $V=\sum_{i=1}^{n} V_{i}=X-\mathbb{E}[X]$.
+
+  Therefore, 
+  \begin{equation}
+    P(Z-\mathbb{E}[X] \geq t) \leq e^{-s t} \mathbb{E}\left[e^{\sum_{i=1}^{n} s V_{i}}\right]=e^{-s t} \prod_{i=1}^{n} \mathbb{E}\left[e^{s V_{i}}\right]
+  \end{equation}
+
+  Let $V_{i}$ be bounded by the interval $[L_i , U_i]$. 
+  Because $\left| X - X_{i}' \right| \leq B_{i}$ (26), it follows that $\left| V_i \right| \leq B_i$.
+  Thus, we have $\left| U_i - L_{i} \right| \leq B_i$.
+  
+  Because 
+  \begin{equation}
+    \mathbb{E}\left[e^{s V_{i}}\right] \leq e^{\frac{s^{2}\left(U_{i}-L_{i}\right)^{2}}{8}} \leq e^{\frac{s^{2} B_{i}^{2}}{8}}
+  \end{equation}
+  
+  We then have 
+  \begin{equation}
+    P(X-\mathbb{E}[X] \geq t) \leq e^{-t s} \prod_{i=1}^{n} e^{\frac{s^{2} B_{i}^{2}}{8}}=e^{s^{2} \sum_{i=1}^{n} \frac{B_{i}^{2}}{8}-s t}
+  \end{equation}
+  Then we can minimize the bound respect to $s$ and have
+  \begin{equation}
+    2 s \sum_{i=1}^{n} \frac{B_{i}^{2}}{8}-t=0 
+    \Rightarrow s=\frac{4 t}{\sum_{i=1}^{n} B_{i}^{2}}
+  \end{equation}
+
+  Then the bound is 
+  \begin{equation}
+    P(X-\mathbb{E}[X] \geq t) \leq e^{\left(\frac{4 t}{\sum_{i=1}^{n t} B_{i}^{2}}\right)^{2} \sum_{i=1}^{n} \frac{B_{i}^{2}}{8}-\left(\frac{4 t^{2}}{\sum_{i=1}^{n} B_{i}^{2}}\right)} \\
+    \Rightarrow P(X- \mathbb{E}[X] \geq t) \leq e^{- \frac{2t^2}{\sum_{i=1}^{n} B_{i}^2}}
+  \end{equation}
+
+  It follows the Bounded Differences ineuqality.
+\end{proof}
+  
+Example 1: Rademacher Averages \cite*{Bartlett:2020}
+
+For a set $A \subset \mathbb{R}^n$, Consider
+\begin{equation}
+  Z=\sup _{a \in A}\langle\epsilon, a\rangle
+\end{equation}
+where $\epsilon = (\epsilon_1, \dots, \epsilon_n)$ is a sequence of i.i.d uniform $\{ \pm 1 \}$ random variables. 
+Define the Rademacher complexity of $A$ as $R(A) = \mathbb{E}Z/n$. (a measure of the size of $A$). 
+The bounded difference approach implies that $Z$ is concentrated around $R(A)$:
+  \begin{corollary}
+    $Z$ is sub-Gaussian with parameter $4\sum_i \sup_{a \in A} a_{i}^2$.
+  \end{corollary}
+
+  \begin{proof}
+    Rewrite $Z = f(\epsilon) = f(\epsilon_1, \dots, \epsilon_n)$. 
+    Note that a change of $\epsilon_i$ will results in a change in $Z$ of no more than $B_i = \sup_{a \in A} 2 \left| a_i \right|$.
+    Then the result follows.
+  \end{proof}
+
+Example 2: Exmpirical Process \cite*{Bartlett:2020}
+
+For a class $F$ of functions $f: \mathcal{X} \rightarrow [0,1]$, suppose that $X_1, \dots, X_n $ are i.i.d on $\mathcal{X}$.
+Consider that 
+\begin{equation}
+  Z=\sup _{f \in F}\left|\mathbb{E} f(X)-\frac{1}{n} \sum_{i=1}^{n} f\left(X_{i}\right)\right|=:\|\underbrace{P-P_{n}}_{\text {emp proc }}\|_{F}
+\end{equation}
+
+This is called a uniform law of large numbers, if $Z$ converges to 0.
+It shows that $Z$ is concentrated about $\mathbb{E}Z$:
+
+\begin{corollary}
+  $Z$ is sub-Gaussian with parameter $1/n$.
+\end{corollary}
+
+\begin{proof}
+  Rewrite $Z = g(X_1, \dots, X_n)$. Note that a change of $X_i$ will results in a change in $Z$ of no more than $B_n = 1/n$.
+  Then the result follows.
+\end{proof}
+
+\subsection{Concentration}
+Recall the bounded differences inequality without absolute values. 
+\begin{equation}
+    P(f(X)-\mathbb{E} f(X) \geq t) \leq \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
+\end{equation}
+
+when we apply $-t$ to the inequality, we have 
+\begin{equation}
+    P(f(X)-\mathbb{E} f(X) \leq -t) \leq  \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
+\end{equation}
+
+This two inequalities show that $f(X)$ is concentrated around $\mathbb{E}f(X)$ within the radius of $t \approx \sqrt{n}$.
+
+Here is an example of the application by the inequality.
+
+\begin{itemize}
+    \item Let $\mathcal{G}_{n,p}$ be a random graph over $n$ vertices where each edge is included in the graph independently 
+    with probability $p$. Note that we have $m$ random variables, one indicator variable for each edge being included. 
+    Note that the chromatic number of the graph is a function with bounded difference. \cite*{hmaji:2017}
+\end{itemize}
+  % ...

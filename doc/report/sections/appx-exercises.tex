@@ -3,3 +3,85 @@
 % Exercises section
 
 \section{Exercises}
+
+\subsection{Exercise 1: Bernstein's Inequality}
+Prove the Bernstein's Inequality
+
+If $\mathbb{P}( \left| X_i \right| \leq c) = 1$ and $\mathbb{E}(X_i) = \mu$, then for any $\epsilon > 0$,
+\begin{equation}
+    \mathbb{P}\left(\left|\bar{X}_{n}-\mu\right|>\epsilon\right) \leq 2 \exp \left\{-\frac{n \epsilon^{2}}{2 \sigma^{2}+2 c \epsilon / 3}\right\}
+\end{equation}
+
+Solution:
+
+\begin{lemma} \cite*{John:2008}
+    Suppose thath $\left| X \right| \leq c$ and $\mathbb{E}(X) = 0$, for any $t >0$,
+    \begin{equation}
+      \mathbb{E}(e^{t X}) \leq \exp \{ t^2 \sigma^2 ( \frac{e^{t c} -1 -t c}{(t c)^2}) \}
+    \end{equation}
+    where $\sigma^2 = Var(X)$
+\end{lemma}
+
+\begin{proof}
+    Let $F=\sum_{r=2}^{\infty} \frac{t^{r-2} \mathbb{E}\left(X^{r}\right)}{r ! \sigma^{2}}$.
+    Then, 
+    \begin{equation}
+        \mathbb{E}\left(e^{t X}\right)=\mathbb{E}\left(1+t x+\sum_{r=2}^{\infty} \frac{t^{r} X^{r}}{r !}\right)=1+t^{2} \sigma^{2} F \leq e^{t^{2} \sigma^{2} F}
+    \end{equation}
+
+    For $r \geq 2$, $\mathbb{E}\left(X^{r}\right)=\mathbb{E}\left(X^{r-2} X^{2}\right) \leq c^{r-2} \sigma^{2}$.
+
+    Therefore, we have 
+    \begin{equation}
+        F \leq \sum_{r=2}^{\infty} \frac{t^{r-2} c^{r-2} \sigma^{2}}{r ! \sigma^{2}}=\frac{1}{(t c)^{2}} \sum_{i=2}^{\infty} \frac{(t c)^{r}}{r !}=\frac{e^{t c}-1-t c}{(t c)^{2}}
+    \end{equation}
+
+    Hence, 
+    \begin{equation}
+        \mathbb{E}\left(e^{t X}\right) \leq \exp \left\{t^{2} \sigma^{2} \frac{e^{t c}-1-t c}{(t c)^{2}}\right\}
+    \end{equation}
+\end{proof}
+
+From Lemma A.1, we can assume that $\mu = 0$ for simplicity. Then
+\begin{equation}
+    \mathbb{E}\left(e^{t X_{i}}\right) \leq \exp \left\{t^{2} \sigma_{i}^{2} \frac{e^{t c}-1-t c}{(t c)^{2}}\right\}
+\end{equation}
+where $\sigma^2 = \mathbb{E}(X_{i}^2)$. 
+
+Then we have 
+\begin{equation}
+    \begin{aligned}
+    \mathbb{P}\left(\bar{X}_{n}>\epsilon\right) &=\mathbb{P}\left(\sum_{i=1}^{n} X_{i}>n \epsilon\right)=\mathbb{P}\left(e^{t \sum_{i=1}^{n} X_{i}}>e^{t n \epsilon}\right) \\
+    & \leq e^{-t n \epsilon} \mathbb{E}\left(e^{t \sum_{i=1}^{n} X_{i}}\right)=e^{-t n \epsilon} \prod_{i=1}^{n} \mathbb{E}\left(e^{t X_{i}}\right) \\
+    & \leq e^{-t n \epsilon} \exp \left\{n t^{2} \sigma^{2} \frac{e^{t c}-1-t c}{(t c)^{2}}\right\}
+    \end{aligned}
+\end{equation}
+
+Take $t = (1/c) \log (1 + \epsilon c / \sigma^2)$ we will have"
+\begin{equation}
+    \mathbb{P}\left(\bar{X}_{n}>\epsilon\right) \leq \exp \left\{-\frac{n \sigma^{2}}{c^{2}} h\left(\frac{c \epsilon}{\sigma^{2}}\right)\right\}
+\end{equation}
+where $h(u) = (1+u) \log(1+u) - u$.
+
+By noting that $h(u) \geq u^2 / (2+2u/3)$ for $u \geq 0$, we just show the Bernstein's Inequality.
+
+\subsection{Exercise 2}
+Prove that for any $z > 0$, if $m \geq 3(z_3) \ln (z+3)$, then $\frac{m}{\ln m} >z$. \cite*{Kutin:2002}
+
+Solution:
+
+Firstly, we note that 
+\begin{equation}
+    \frac{d}{d m} \frac{m}{\ln m}=\frac{\ln m-1}{\ln ^{2} m}
+\end{equation}
+
+Thus, the term $\frac{m}{\ln m}$ is increasing when $m > e$.
+
+Then, given that $\ln (z+3) \geq \ln \ln(z+3)$, and $z > 0 \Rightarrow \ln(z+3) > \ln3$. 
+Hence, 
+\begin{equation}
+    \begin{aligned}
+    \frac{m}{\ln m} & \geq \frac{3(z+3) \ln (z+3)}{\ln 3+\ln (z+3)+\ln \ln (z+3)} \\
+    &>\frac{3(z+3) \ln (z+3)}{3 \ln (z+3)}=z+3>z
+    \end{aligned}
+\end{equation}
