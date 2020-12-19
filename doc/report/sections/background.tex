@@ -12,13 +12,16 @@ They are involved in underpinning methods or approaches used in actual cases.
 Here are several famous concentration inequalities involved in statistical learning. 
 \begin{itemize}
   \item Markov's Inequality
-  \item Chebychev's Inequality 
+  \item Chebyshev's Inequality 
   \item Bounded Differences Inequality 
 \end{itemize}
 
 In this project, I will focus on the Bounded Differences Inequality.
 
-\subsection{Chebychev's Inequality}
+\subsection{Chebyshev's Inequality}
+Chebyshev's Inequality is a basic tool to develop the bounded inequalities for different quantities. 
+Usually it is stated for random variables, while sometimes it can be generalized for measure spaces.
+Here is the probalistic statement.
 \begin{theorem} 
   For some $a \in X$ where $X \subseteq R$, let $f$ be a non-negative function such that
   $\{ f(x) \geq b, for all x \geq a\}$, where $b \in Y$ where $Y \subseteq R$. Then the following ineuqality holds,
@@ -28,9 +31,11 @@ In this project, I will focus on the Bounded Differences Inequality.
 \end{theorem}
 
 \subsection{Chernoff's bound}
+The Chernoff's bound is a version of Markov's inequality, as well as the Chebyshev's one.
+
 Suppose the function $f$ is monotonically increasing.
 Thus, for every $x \geq a$, $f(x) \geq f(a)$. 
-Substitute $b = f(a)$ in Chebychev's Inequality, and we have:
+Substitute $b = f(a)$ in Chebyshev's Inequality, and we have:
 
 \begin{equation}
   P(x \geq a) \leq \frac{\mathbb{E}f(x)}{f(a)}
@@ -54,44 +59,16 @@ The Chernoff's bound is then,
   P(x \geq a) \leq \frac{\mathbb{E}e^{sx}}{e^{sa}}
 \end{equation}
 
-\subsection{Chernoff technique}
-
-\begin{theorem} \cite*{Bartlett:2020}
-  For $t>0$:
-  \begin{equation}
-    P(X-\mathbb{E} X \geq t) \leq \inf _{\lambda>0} e^{-\lambda t} M_{X-\mu}(\lambda)
-  \end{equation}
-\end{theorem}
-
-where $M_{X-\mu}(\lambda)=\mathbb{E} \exp (\lambda(X-\mu))(\text { for } \mu=\mathbb{E} X)$
-is the moment-generating function of $X-\mu$.
-
-By using Hoeffding's Inequality, we will have 
-
-\begin{theorem} \cite*{Bartlett:2020}
-  For a random variable $X \in [a,b]$ with $\mathbb{E}X = \mu$ and $\lambda \in \mathbb{R}$,
-  \begin{equation}
-    \ln M_{X-\mu}(\lambda) \leq \frac{\lambda^{2}(b-a)^{2}}{8}
-  \end{equation}
-\end{theorem}
-
-\subsection{Sub-Gaussian Random Variables}
-\begin{definition} \cite*{Bartlett:2020}
-  $X$ is sub-Gaussian with parameter $\sigma^2$ if, for all $\lambda \in \mathbb{R}$,
-  \begin{equation}
-    \ln M_{X-\mu}(\lambda) \leq \frac{\lambda^{2}(\sigma)^{2}}{2}
-  \end{equation}
-\end{definition}
-
-Examples:
-
-\begin{itemize}
-  \item $X \sim N(\mu, \sigma^2)$ is sub-Gaussian with parameter $\sigma^2$;
-  \item $X \in [a,b]$ is sub-Gaussian with parameter $(b-a)^2 /4$;
-  \item $X_{i}$ is independent, sub-Gaussian with parameters $\sigma_{i}^2$ implies $\sum_{i}X_{i}$ is sub-Gaussian with parameter $\sum_{i}\sigma_{i}^2$.
-\end{itemize}
-
 \subsection{Pre-Gaussian Random Variables}
+The Pre-Gaussian random variables develop from the Sub-Gaussian random variable.
+The Sub-Gaussian random variables are defined as 
+
+\begin{equation}
+  \log M_{X-\mu}(\lambda) \leq \frac{\lambda^{2} \sigma^{2}}{2}
+\end{equation}
+
+The Pre-Gaussian has one more parameter than the Sub-Gaussian one.
+
 \begin{definition} \cite*{Bartlett:2020}
   $X$ is pre-Gaussian with parameters $(\sigma^2,b)$ if, for all $\left| \lambda \right| < 1/b$,
   \begin{equation}
@@ -105,7 +82,9 @@ Example:
   \item Sub-Gaussian $X$ with parameter $\sigma^2$ is pre-Gaussian with parameters $(\sigma^2, b)$ for all $b>0$.
 \end{itemize}
 
-\subsection{Martingales}
+\subsection{Martingale Difference Sequences}
+
+The martingales have the following definition.
 
 \begin{definition} \cite*{Bartlett:2020}
   A sequence $Y_n$ of random variables adapted to a filtration $\mathcal{F}_n$ is a martingale if, for all $n$,
@@ -124,7 +103,7 @@ Note:
   \item $Y_n$ is adapted to $\mathcal{F}_{n}$ means  that each $Y_n$ is measurable with respect to $\mathcal{F}_n$.
 \end{itemize}
 
-\subsection{Martingale Difference Sequences}
+Then the martingale difference sequencs can be generated based on the definition of martingales.
 
 \begin{definition} \cite*{Bartlett:2020}
   A sequence $D_n$ of random variables adapted to a filtration $\mathcal{F}_n$ is a martingale Difference sequence if, for all n,
