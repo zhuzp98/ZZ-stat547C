@@ -7,14 +7,15 @@
 \subsection{Bounds on Pre-Gaussian Random Variables}
 First of all, we want to check the bounds on Pre-Gaussian random variables.
 Based on the definition of Pre-Gaussian, we have the concentration version of definition that:
-
-\begin{equation}
-  \text{For any } t>0, \max \{P(X \geq t), P(X \leq -t) \} \leq \exp(\frac{-t^2}{2 \sigma^2})
-\end{equation}
+\begin{theorem}
+  \begin{equation}
+    \text{For any } t>0, \max \{P(X \geq t), P(X \leq -t) \} \leq \exp(\frac{-t^2}{2 \sigma^2})
+  \end{equation}
+\end{theorem}
 
 Here, we have an expansion of it.
 
-\begin{theorem} \cite*{Bartlett:2020}
+\begin{lemma} \cite*{Bartlett:2020}
   For $X$ pre-Gaussian with parameters $(\sigma^2, b)$,
   \begin{equation}
     P(X \geq \mu+t) \leq\left\{\begin{array}{ll}
@@ -22,7 +23,7 @@ Here, we have an expansion of it.
     \exp \left(-\frac{t}{2 b}\right) & \text { if } t>\sigma^{2} / b
     \end{array}\right.
   \end{equation}
-\end{theorem}
+\end{lemma}
 
 Because $t^2/ \sigma^2 > t^2/ (\sigma^2 + bt)$ and $t^2/ bt > t^2/ (\sigma^2 + bt)$, we have
 
@@ -72,7 +73,7 @@ Actually, for $\mathbb{E}X_{i} = 0$, we have
 
 When $\left| \lambda \right| < 1/b_i$, for all $i$, the ineuqality holds.
 
-\begin{theorem} \cite*{Bartlett:2020}
+\begin{corollary} \cite*{Bartlett:2020}
   For independent $X_i$, pre-Gaussian with parameters $(\sigma_{i}^2 , b_i)$, with mean $\mu_i$,
   \begin{equation}
     \begin{array}{l}
@@ -83,11 +84,9 @@ When $\left| \lambda \right| < 1/b_i$, for all $i$, the ineuqality holds.
     
     \end{array}
     \end{equation}
-\end{theorem}
+    where $\sigma^{2}=\sum_{i} \sigma_{i}^{2}$ and $b=\max _{i} b_{i}$.
+\end{corollary} 
 
-where $\sigma^{2}=\sum_{i} \sigma_{i}^{2}$ and $b=\max _{i} b_{i}$.
-
-\subsection{Bernstein's Inequality}
 
 Consider a random variable $X$ with mean $\mu$, variance $\sigma^2$, and bound $\left| X-\mu \right| \leq b$.
 Then $X$ is pre-Gaussian with parameters $(2\sigma^2 , 2b)$. Hence,
@@ -97,7 +96,7 @@ Then $X$ is pre-Gaussian with parameters $(2\sigma^2 , 2b)$. Hence,
 
 When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2 + bt/3)$, we get the Bernstein's Inequality.
 
-\begin{theorem} \cite*{Kutin:2002}
+\begin{theorem} (Bernstein's Inequality)\cite*{Kutin:2002}
   Let $\xi_{1}, \dots, \xi_{m}$ be independent random variable, with $\left| \xi_k - \mathbb{E}\xi_k \right| \leq b$ for all $k$. 
   Let $X = \sum_{k=1}^{m} \xi_k$, and let $\sigma^2 = Var(X)$.
   Let $\mu = \mathbb{E}X$. Then we have
