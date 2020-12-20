@@ -21,10 +21,10 @@ In this project, I will focus on the Bounded Differences Inequality.
 \subsection{Chebyshev's Inequality}
 Chebyshev's Inequality is a basic tool to develop the bounded inequalities for different quantities. 
 Usually it is stated for random variables, while sometimes it can be generalized for measure spaces.
-Here is the probalistic statement.
+Here is the probabilistic statement.
 \begin{theorem} 
   For some $a \in X$ where $X \subseteq R$, let $f$ be a non-negative function such that
-  $\{ f(x) \geq b, for all x \geq a\}$, where $b \in Y$ where $Y \subseteq R$. Then the following ineuqality holds,
+  $\{ f(x) \geq b, for all x \geq a\}$, where $b \in Y$ where $Y \subseteq R$. Then the following inequality holds,
   \begin{equation}
     P(x \geq a) \leq \frac{\mathbb{E}f(x)}{b}
   \end{equation}
@@ -47,7 +47,7 @@ Markov's Inequality says that
   P(x \geq a) \leq \frac{\mathbb{E}x}{a}
 \end{equation}
 
-It holds for $a >0$ and nonnegetive x, 
+It holds for $a >0$ and non-negative x, 
 
 \begin{equation}
   P(|x-\mathbb{E}(x)| \geq a) \leq \frac{\mathbb{E}\left\{|x-\mathbb{E}(x)|^{2}\right\}}{a^{2}}=\frac{\operatorname{Var}\{x\}}{a^{2}}

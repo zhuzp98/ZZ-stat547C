@@ -4,7 +4,7 @@
 
 \section{Body}
 
-\subsection{Bounds on Pre-Gaussian Random Variables}
+\subsection{Bounds for Pre-Gaussian Random Variables}
 First of all, we want to check the bounds on Pre-Gaussian random variables.
 Based on the definition of Pre-Gaussian, we have the concentration version of definition that:
 \begin{theorem}
@@ -71,7 +71,7 @@ Actually, for $\mathbb{E}X_{i} = 0$, we have
   \end{aligned}
 \end{equation}
 
-When $\left| \lambda \right| < 1/b_i$, for all $i$, the ineuqality holds.
+When $\left| \lambda \right| < 1/b_i$, for all $i$, the inequality holds.
 
 \begin{corollary} \cite*{Bartlett:2020}
   For independent $X_i$, pre-Gaussian with parameters $(\sigma_{i}^2 , b_i)$, with mean $\mu_i$,
@@ -94,7 +94,7 @@ Then $X$ is pre-Gaussian with parameters $(2\sigma^2 , 2b)$. Hence,
   P(X \geq \mu+t) \leq \exp \left(-\frac{t^{2}}{4\left(\sigma^{2}+b t\right)}\right)
 \end{equation}
 
-When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2 + bt/3)$, we get the Bernstein's Inequality.
+When we improve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2 + bt/3)$, we get the Bernstein's Inequality.
 
 \begin{theorem} (Bernstein's Inequality)\cite*{Kutin:2002}
   Let $\xi_{1}, \dots, \xi_{m}$ be independent random variable, with $\left| \xi_k - \mathbb{E}\xi_k \right| \leq b$ for all $k$. 
@@ -106,6 +106,18 @@ When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2
 \end{theorem}
 
 \subsection{Concentration Bounds for Martingales}
+
+Recall the definition of martingales from Definition 1.2. The martingale is a sequence of random variables adapted to a filtration if, for all integers $n$, we have 
+
+\begin{equation}
+    \begin{aligned}
+    \mathbb{E}\left|Y_{n}\right| &<\infty \\
+    \mathbb{E}\left[Y_{n+1} \mid \mathcal{F}_{n}\right] &=Y_{n}
+    \end{aligned}
+\end{equation}
+
+For martingale difference sequence $D_n$ s.t. $D_n = Y_{n} - Y_{n-1}$, we can construct bounds by the properties of Pre-Gaussian random variables which shown in the first section. 
+
 \begin{theorem} \cite*{Bartlett:2020}
   Consider a martingale Difference sequence $D_n$ which is adapted to a filtration $\mathcal{F}_n$. 
   Assume it satisfies 
@@ -135,16 +147,15 @@ When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2
   Iterating shows that $\sum_i D_i$ is pre-Gaussian.
 \end{proof}
 
-\begin{theorem} \cite*{Bartlett:2020}
+\begin{lemma} \cite*{Bartlett:2020}
   Consider a martingale difference sequence $D_i$ that a.s. falls in an interval of length $B_i$. Then
   \begin{equation}
     P\left(\left|\sum_{i} D_{i}\right| \geq t\right) \leq 2 \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
   \end{equation}
-\end{theorem}
+\end{lemma}
 
-\subsection{Bounded Differences Inequality}
 
-\begin{theorem} \cite*{Sridharan_agentle}
+\begin{corollary} (McDiarmid's Inequality) \cite*{Sridharan_agentle}
   Suppose $f: \mathcal{X}^n \rightarrow \mathbb{R}$ satisfies the following bounded differences inequality:
 
   for all $x_1, \dots, x_n , x_{i}' \in \mathcal{X}$,
@@ -156,7 +167,7 @@ When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2
   \begin{equation}
     P(|f(X)-\mathbb{E} f(X)| \geq t) \leq 2 \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
   \end{equation}
-\end{theorem}
+\end{corollary}
 
 \begin{proof}
   Use the Chernoff's bound (5), we have
@@ -201,9 +212,12 @@ When we imporve the constants from $4\left(\sigma^{2}+b t\right)$ to $2(\sigma^2
     \Rightarrow P(X- \mathbb{E}[X] \geq t) \leq e^{- \frac{2t^2}{\sum_{i=1}^{n} B_{i}^2}}
   \end{equation}
 
-  It follows the Bounded Differences ineuqality.
+  It follows the Bounded Differences inequality.
 \end{proof}
-  
+
+\subsection{Applications of Bounded Differences Inequality}
+The bounded differences inequality has broad applications on  calculating the tail-bounds for functions with non-independent random variables. Here are some examples that apply the bounded differences inequality.
+
 Example 1: Rademacher Averages \cite*{Bartlett:2020}
 
 For a set $A \subset \mathbb{R}^n$, Consider
@@ -213,9 +227,9 @@ For a set $A \subset \mathbb{R}^n$, Consider
 where $\epsilon = (\epsilon_1, \dots, \epsilon_n)$ is a sequence of i.i.d uniform $\{ \pm 1 \}$ random variables. 
 Define the Rademacher complexity of $A$ as $R(A) = \mathbb{E}Z/n$. (a measure of the size of $A$). 
 The bounded difference approach implies that $Z$ is concentrated around $R(A)$:
-  \begin{corollary}
+  \begin{theorem}
     $Z$ is sub-Gaussian with parameter $4\sum_i \sup_{a \in A} a_{i}^2$.
-  \end{corollary}
+  \end{theorem}
 
   \begin{proof}
     Rewrite $Z = f(\epsilon) = f(\epsilon_1, \dots, \epsilon_n)$. 
@@ -234,33 +248,29 @@ Consider that
 This is called a uniform law of large numbers, if $Z$ converges to 0.
 It shows that $Z$ is concentrated about $\mathbb{E}Z$:
 
-\begin{corollary}
+\begin{theorem}
   $Z$ is sub-Gaussian with parameter $1/n$.
-\end{corollary}
+\end{theorem}
 
 \begin{proof}
   Rewrite $Z = g(X_1, \dots, X_n)$. Note that a change of $X_i$ will results in a change in $Z$ of no more than $B_n = 1/n$.
   Then the result follows.
 \end{proof}
 
-\subsection{Concentration}
-Recall the bounded differences inequality without absolute values. 
-\begin{equation}
-    P(f(X)-\mathbb{E} f(X) \geq t) \leq \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
-\end{equation}
+Example 3: U Statistics
 
-when we apply $-t$ to the inequality, we have 
-\begin{equation}
-    P(f(X)-\mathbb{E} f(X) \leq -t) \leq  \exp \left(-\frac{2 t^{2}}{\sum_{i} B_{i}^{2}}\right)
-\end{equation}
+Let's define a function $f$ on $\{ Y_k\}_{k=1}^{\infty}$ s.t. $f(Y_1, \dots , Y_n) = \frac{1}{\left(\begin{array}{l}n \\ 2\end{array}\right)} \sum_{i<j} g\left(Y_{i}, Y_{j}\right)$, where $g: \mathbb{R}^2 \rightarrow \mathbb{R}$ is a symbolic function and $g(a,b) \leq b, \forall a,b$.
 
-This two inequalities show that $f(X)$ is concentrated around $\mathbb{E}f(X)$ within the radius of $t \approx \sqrt{n}$.
+Then we can show that such function $f$ satisfies the bounded differences inequality. 
 
-Here is an example of the application by the inequality.
-
-\begin{itemize}
-    \item Let $\mathcal{G}_{n,p}$ be a random graph over $n$ vertices where each edge is included in the graph independently 
-    with probability $p$. Note that we have $m$ random variables, one indicator variable for each edge being included. 
-    Note that the chromatic number of the graph is a function with bounded difference. \cite*{hmaji:2017}
-\end{itemize}
-  % ...
+\begin{proof}
+  \begin{equation}
+    \begin{aligned}
+        f\left(Y_{1}, \ldots, Y_{k}, \ldots, Y_{n}\right)-f\left(Y_{1}, \ldots, Y_{k}^{\prime}, \ldots, Y_{n}\right) &=\frac{1}{\left(\begin{array}{l}
+        n \\
+        2
+        \end{array}\right)} \sum_{j \neq k} g\left(Y_{j}, Y_{k}\right)-g\left(Y_{j}, Y_{k}^{\prime}\right) \\
+        & \leq \frac{2(2 b)}{n(n-1)} \leq \frac{4 b}{n}
+    \end{aligned}
+  \end{equation}
+\end{proof}
